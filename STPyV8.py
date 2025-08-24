@@ -414,8 +414,10 @@ def icu_sync():
                 version_file = os.path.join(folder, "stpyv8-version.txt")
                 with open(version_file, encoding="utf-8", mode="w") as fd:
                     fd.write(__version__)
-            except PermissionError:
-                pass
+            except OSError as e:
+                if isinstance(e, PermissionError) or getattr(e, "errno", None) == errno.EROFS:
+                    continue
+                raise
 
 
 icu_sync()
