@@ -7,6 +7,7 @@ from __future__ import print_function
 import os
 import sys
 import re
+import errno
 import collections.abc
 
 import _STPyV8
